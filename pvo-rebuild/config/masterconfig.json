@@ -1,5 +1,0 @@
-{
-    "connectionString":"mongodb+srv://extreme45nm:congminh123@testmongo-sxopr.gcp.mongodb.net/test?retryWrites=true",
-    "secret":"ahihi",
-    "saltRound":10
-}
