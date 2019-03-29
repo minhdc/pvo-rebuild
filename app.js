@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
+var verify = require('./services/verify')
 var users = require('./routes/UserController');
 var concepts = require('./routes/ConceptController')
 var app = express();
@@ -24,7 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
-app.use('/concepts',concepts)
+app.use('/concepts',verify.validateUser,concepts)
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
