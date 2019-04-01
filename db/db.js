@@ -10,5 +10,8 @@ module.exports = {
     User: require('../models/User'),
     Concept: require('../models/Concept'),
     Example: require('../models/Example'),
-    ConceptConcept: require('../models/ConceptConcept')
+    ConceptRelation: require("../models/ConceptRelation"),
+    ConceptConcept: require('../models/ConceptConcept'),
+    ConceptExampleRelation: require("../models/ConceptExampleRelation"),
+    ConceptExample: require('../models/ConceptExample')
 }

@@ -8,7 +8,7 @@ router.get('/id',getConceptById)
 module.exports = router
 
 function getListConcept(req,res){
-    conceptServices.getListConcept(req.body,(err,results)=>{
+    conceptServices.getListConcept(req.query,(err,results)=>{
         if(err){
             res.send({error:err.errmsg})
         }else{

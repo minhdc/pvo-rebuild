@@ -7,4 +7,6 @@ let ConceptRelationSchema = new Schema({
     createdBy:{type:Schema.Types.ObjectId,required:true}
 })
 
-module.exports = ConceptRelationSchema
+let ConceptRelation = mongoose.model('concept_relations',ConceptRelationSchema)
+
+module.exports = ConceptRelation

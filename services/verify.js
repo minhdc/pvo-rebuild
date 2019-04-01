@@ -11,7 +11,7 @@ function validateUser(req,res,next){
             console.log(err)
             res.json({error:err.message})
         }else{
-            req.body.userId=decoded.id
+            req.body.iduser=decoded.id
             next()
         }
     })

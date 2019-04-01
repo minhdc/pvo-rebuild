@@ -4,15 +4,15 @@ let ConceptRelation = db.ConceptRelation
 
 module.exports = {
     addRelation,
-    updateRelation,
-    deleteRelation,
+    updateRelation
 }
 
 function addRelation(params,done){
     let conceptRelation = new ConceptRelation({
-        relationName:params.relationName,
+        relationName:params.relationname,
         createdBy:params.iduser
     })
+
     conceptRelation.save((err,results)=>{
         if(err){
             console.log(err)
@@ -36,3 +36,4 @@ function updateRelation(params,done){
         }
     })
 }
+

@@ -1,6 +1,7 @@
 const db = require('../db/db')
 
 let Concept = db.Concept
+let ConceptConceptRelation = db.ConceptConcept
 
 module.exports ={
     addConcept,
@@ -9,7 +10,10 @@ module.exports ={
     getConceptByName,
     updateConceptById,
     deleteConceptById,   
-    addConceptRelation,                                                                                                       
+    addConceptRelation,       
+    getConceptRelationById,                                                                                                
+    updateConceptRelationById,
+    deleteConceptRelationById,
 }
 
 function addConcept(params,done) {
@@ -80,6 +84,64 @@ function updateConceptById(params,done){
 
 function deleteConceptById(params,done){
     Concept.deleteOne({_id:params.id},(err,results)=>{
+        if(err){
+            console.log(err)
+            return done(err)
+        }else{
+            return done(null,results)
+        }
+    })
+}
+
+///////////////////////////////////////////////
+///////////////////////////////////////////////
+function addConceptRelation(params,done){
+    let conceptConceptRelation = new ConceptConceptRelation({
+        id_parent: params.idparent,
+        id_child: params.idchild,
+        id_relation: params.idrelation,
+        createdBy: params.userid
+    })
+    conceptConceptRelation.save((err,results)=>{
+        if(err){
+            console.log(err)
+            return done(err)
+        }else{
+            return done(null,results)
+        }
+    })
+}
+
+function getConceptRelationById(params,done){
+    ConceptConceptRelation.findOne({_id:params.idconceptrelation},(err,results)=>{
+        if(err){
+            console.log(err)
+            return done(err)
+        }else{
+            return done(null,results)
+        }
+    })
+}
+
+function updateConceptRelationById(params,done){
+    ConceptConceptRelation.update(
+        {_id:params.idconceptrelation, createdBy:params.iduser},
+        {
+            id_parent: params.idparent,
+            id_child: params.idchild,
+            id_relation:params.idrelation
+        },(err,results)=>{
+            if(err){
+                console.log(err)
+                return done(err)
+            }else{
+                return done(null,results)
+            }
+        })
+}
+
+function deleteConceptRelationById(params,done){
+    ConceptConceptRelation.deleteOne({_id:params.idconceptrelation},(err,results)=>{
         if(err){
             console.log(err)
             return done(err)
