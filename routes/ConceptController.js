@@ -4,7 +4,7 @@ let conceptServices = require('../services/ConceptServices')
 
 router.get('/',getListConcept)
 router.post('/',addConcept)
-router.get('/:id',getConceptById)
+router.get('/id',getConceptById)
 module.exports = router
 
 function getListConcept(req,res){
@@ -28,7 +28,7 @@ function addConcept(req,res){
 }
 
 function getConceptById(req,res){
-    conceptServices.getConceptById(req.body,(err,results)=>{
+    conceptServices.getConceptById(req.query,(err,results)=>{
         if(err){
             res.send({error:err.errmsg})
         }else{

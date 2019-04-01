@@ -9,5 +9,6 @@ mongoose.Promise = global.Promise
 module.exports = {
     User: require('../models/User'),
     Concept: require('../models/Concept'),
-    Example: require('../models/Example')
+    Example: require('../models/Example'),
+    ConceptConcept: require('../models/ConceptConcept')
 }

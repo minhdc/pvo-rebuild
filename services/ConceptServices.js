@@ -8,7 +8,8 @@ module.exports ={
     getConceptById,
     getConceptByName,
     updateConceptById,
-    deleteConceptById,                                                                                                          
+    deleteConceptById,   
+    addConceptRelation,                                                                                                       
 }
 
 function addConcept(params,done) {
@@ -33,6 +34,8 @@ function getListConcept(params,done){
             console.log(err)
             return done(err)
         }else{
+            console.log(params.iduser)
+            console.log(results)
             return done(null,results)
         }
     })

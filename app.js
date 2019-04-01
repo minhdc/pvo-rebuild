@@ -9,8 +9,29 @@ var routes = require('./routes/index');
 var verify = require('./services/verify')
 var users = require('./routes/UserController');
 var concepts = require('./routes/ConceptController')
+
+var swaggerJsDoc = require('swagger-jsdoc')
+
 var app = express();
 
+
+var swaggerDef = {
+    info: {
+        title: 'PVO Swagger API',
+        version:'0.0.1',
+        description:'PVO',
+    },
+    host:'localhost:3000',
+    basePath:'/'
+}
+
+var options = {
+    swaggerDefinition: swaggerDef,
+    apis:['./routes/*.js'],
+}
+
+//init swagger
+var swaggerSpec = swaggerJsDoc(options)
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -33,7 +54,14 @@ app.use(function(req, res, next) {
     next(err);
 });
 
+
+app.get('/swagger.json',(req,res)=>{
+    //res.setHeader('Content-Type','application/json')
+    res.status(200).send(swaggerSpec)
+})
+
 /// error handlers
+
 
 // development error handler
 // will print stacktrace
