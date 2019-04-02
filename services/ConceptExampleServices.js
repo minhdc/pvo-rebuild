@@ -8,8 +8,11 @@ module.exports = {
     getExampleByConceptId,
     updateExample,
     deleteExample,
+
     addConceptExample,
-    getConceptExampleByConceptId,
+    listConceptExample,
+    getConceptExampleByConceptAndExampleId,
+    
     updateConceptExampleById,
     deleteConceptExampleById,
 }
@@ -73,11 +76,50 @@ function deleteExample(params,done){
 }
 
 function addConceptExample(params,done){
-    
+    let conceptExample = new ConceptExample(
+        {
+            id_concept:params.idconcept,
+            id_example:params.idexample,
+            id_relation:params.idrelation,
+            createdBy:params.userid
+        }
+    )
+    conceptExample.save((err,results)=>{
+        if(err){
+            console.log(err)
+            return done(err)
+        }else{
+            return done(null,results)
+        }
+    })
 }
 
-function getConceptExampleByConceptId(params,done){
-    
+function listConceptExample(params,done){
+    ConceptExample.find({createdBy:params.userid},(err,results)=>{
+        if(err){
+            console.log(err)
+            return done(err)
+        }else{
+            return done(null,results)
+        }
+    })
+}
+
+function getConceptExampleByConceptAndExampleId(params,done){
+    ConceptExample.findOne(
+        {
+            id_concept:params.idconcept,
+            id_example:params.idexample,
+            createdBy:params.userid
+        },(err,results)=>{
+            if(err){
+                console.log(err)
+                return done(err)
+            }else{
+                return done(null,results)
+            }
+        }
+    )
 }
 
 function updateConceptExampleById(params,done){

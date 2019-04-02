@@ -2,6 +2,7 @@ const db = require('../db/db')
 
 let Concept = db.Concept
 let ConceptConceptRelation = db.ConceptConcept
+let ConceptRelation = db.ConceptRelation
 
 module.exports ={
     addConcept,
@@ -10,10 +11,14 @@ module.exports ={
     getConceptByName,
     updateConceptById,
     deleteConceptById,   
+
     addConceptRelation,       
-    getConceptRelationById,                                                                                                
+    getConceptRelationById,
+    getConceptRelationByParentAndChild,
+    
     updateConceptRelationById,
     deleteConceptRelationById,
+
 }
 
 function addConcept(params,done) {
@@ -21,7 +26,7 @@ function addConcept(params,done) {
         concept:params.concept,
         conceptDesc: params.conceptDesc,
         picURL: params.picURL,        
-        createdBy:params.iduser
+        createdBy:params.idUser
     })
     concept.save((err,results)=>{
         if(err){
@@ -121,6 +126,31 @@ function getConceptRelationById(params,done){
             return done(null,results)
         }
     })
+}
+
+function getConceptRelationByParentAndChild(params,done){
+    ConceptConceptRelation.findOne(
+        {
+            id_parent:params.idparent,
+            id_child:params.idchild
+        },
+        (err,results)=>{
+            if(err){
+                console.log(err)
+                return done(err)
+            }else{                
+                ConceptRelation.find({_id:results.id_relation},(err,results)=>{
+                    if(err){
+                        console.log(err)
+                        return done(err)
+                    }else{
+                        return done(null,results[0].relationName)
+                    }
+                })
+            }
+        }
+
+    )
 }
 
 function updateConceptRelationById(params,done){

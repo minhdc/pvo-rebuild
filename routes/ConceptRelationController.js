@@ -5,6 +5,7 @@ let conceptRelationServices = require('../services/ConceptRelationServices')
 router.post("/",addConceptRelation)
 router.get('/',listConceptRelation)
 
+
 module.exports = router
 
 function addConceptRelation(req,res){
@@ -19,7 +20,7 @@ function addConceptRelation(req,res){
 }
 
 function listConceptRelation(req,res){
-    conceptRelationServices.listConceptRelation(req.query,(err,results)=>{
+    conceptRelationServices.listRelation(req.query,(err,results)=>{
         if(err){
             res.status(400).send({error:err.errmsg})
         }else{

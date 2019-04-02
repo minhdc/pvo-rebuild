@@ -4,13 +4,14 @@ let ConceptRelation = db.ConceptRelation
 
 module.exports = {
     addRelation,
+    listRelation,
     updateRelation
 }
 
 function addRelation(params,done){
     let conceptRelation = new ConceptRelation({
         relationName:params.relationname,
-        createdBy:params.iduser
+        createdBy:params.userid
     })
 
     conceptRelation.save((err,results)=>{
@@ -37,3 +38,13 @@ function updateRelation(params,done){
     })
 }
 
+function listRelation(params,done){
+    ConceptRelation.find((err,results)=>{
+        if(err){
+            console.log(err)
+            return done(err)
+        }else{
+            return done(null,results)
+        }
+    })
+}

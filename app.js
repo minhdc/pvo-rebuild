@@ -10,6 +10,7 @@ var verify = require('./services/verify')
 var users = require('./routes/UserController');
 var concepts = require('./routes/ConceptController');
 var conceptRelations = require("./routes/ConceptRelationController");    
+var conceptExampleRelations = require("./routes/ConceptExampleRelationController");    
 
 var swaggerJsDoc = require('swagger-jsdoc')
 
@@ -49,7 +50,7 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/concepts',verify.validateUser,concepts)
 app.use('/conceptRelations/',verify.validateUser,conceptRelations)
-
+app.use('/conceptExampleRelations/',verify.validateUser,conceptExampleRelations)
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {

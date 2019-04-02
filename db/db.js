@@ -1,7 +1,7 @@
 const config = require('../config/masterconfig.json')
 const mongoose = require('mongoose')
 
-mongoose.connect(config.connectionString,{useNewUrlParser:true})
+mongoose.connect(config.connectionString,{useNewUrlParser:true}) //autoIndex = false -> for production
 mongoose.Promise = global.Promise
 
 

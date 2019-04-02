@@ -2,9 +2,16 @@ let express = require('express')
 let router = express.Router()
 let conceptServices = require('../services/ConceptServices')
 
+
 router.get('/',getListConcept)
 router.post('/',addConcept)
 router.get('/id',getConceptById)
+
+router.post('/relation',addConceptConceptRelation)
+router.get('/relation',getConceptConceptRelationByParentAndChild)
+
+
+
 module.exports = router
 
 function getListConcept(req,res){
@@ -38,3 +45,32 @@ function getConceptById(req,res){
 }
 
 
+function addConceptConceptRelation(req,res){
+    conceptServices.addConceptRelation(req.body,(err,results)=>{
+        if(err){
+            res.status(400).send({error:err.errmsg})
+        }else{
+            res.status(200).send(results)
+        }
+    })
+}
+
+function getConceptConceptRelation(req,res){
+    conceptServices.getConceptRelationById(req.query,(err,results)=>{
+        if(err){
+            res.status(400).send({error:err.errmsg})
+        }else{
+            res.status(200).send(results)
+        }
+    })
+}
+
+function getConceptConceptRelationByParentAndChild(req,res){
+    conceptServices.getConceptRelationByParentAndChild(req.query,(err,results)=>{
+        if(err){
+            res.status(400).send({error:err.errmsg})
+        }else{
+            res.status(200).send(results)
+        }
+    })
+}

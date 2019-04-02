@@ -8,5 +8,7 @@ let ConceptConceptSchema = new Schema({
     createdAt:{type:Schema.Types.Date,default:new Date()},
     createdBy:{type:Schema.Types.ObjectId,required:true}
 })
+ConceptConceptSchema.index({id_parent:1,id_child:1},{unique:true})
+ConceptConcept = mongoose.model('concept_concept_relations',ConceptConceptSchema)
 
-module.exports = ConceptConceptSchema
+module.exports = ConceptConcept
