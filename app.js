@@ -11,6 +11,7 @@ var users = require('./routes/UserController');
 var concepts = require('./routes/ConceptController');
 var conceptRelations = require("./routes/ConceptRelationController");    
 var conceptExampleRelations = require("./routes/ConceptExampleRelationController");    
+var conceptExample = require('./routes/ConceptExampleController');
 
 var swaggerJsDoc = require('swagger-jsdoc')
 
@@ -51,6 +52,7 @@ app.use('/users', users);
 app.use('/concepts',verify.validateUser,concepts)
 app.use('/conceptRelations/',verify.validateUser,conceptRelations)
 app.use('/conceptExampleRelations/',verify.validateUser,conceptExampleRelations)
+app.use('/conceptExample',verify.validateUser,conceptExample)
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {

@@ -128,30 +128,38 @@ function getConceptRelationById(params,done){
     })
 }
 
-function getConceptRelationByParentAndChild(params,done){
-    ConceptConceptRelation.findOne(
-        {
-            id_parent:params.idparent,
-            id_child:params.idchild
-        },
-        (err,results)=>{
-            if(err){
-                console.log(err)
-                return done(err)
-            }else{                
-                ConceptRelation.find({_id:results.id_relation},(err,results)=>{
-                    if(err){
-                        console.log(err)
-                        return done(err)
-                    }else{
-                        return done(null,results[0].relationName)
-                    }
-                })
-            }
-        }
 
-    )
+
+function getConceptRelationByParentAndChild(params,done){        
+        ConceptConceptRelation.findOne(
+            {
+                id_parent:params.idparent,
+                id_child:params.idchild
+            },
+            (err,results)=>{
+                if(err){
+                    return done(err)
+                }else if(results != null){
+                    ConceptRelation.findOne(
+                        {
+                            _id:results.id_relation
+                        },
+                        (err,results)=>{
+                            console.log(results)
+                            if(err){
+                                console.log(err)
+                                return done(err)
+                            }else{
+                                return done(results.relationName)
+                            }
+                    })
+                }else{
+                    return done(null,"No relation")
+                }
+            }
+        )    
 }
+
 
 function updateConceptRelationById(params,done){
     ConceptConceptRelation.update(

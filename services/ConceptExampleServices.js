@@ -2,6 +2,7 @@ const db = require('../db/db')
 
 let Example = db.Example
 let ConceptExample = db.ConceptExample
+let ConceptExampleRelation = db.ConceptExampleRelation
 
 module.exports = {
     addExample,
@@ -116,7 +117,17 @@ function getConceptExampleByConceptAndExampleId(params,done){
                 console.log(err)
                 return done(err)
             }else{
-                return done(null,results)
+                ConceptExampleRelation.findOne(
+                    {_id:results.id_relation},
+                    (err,results) => {
+                        if(err){
+                            console.log(err)
+                            return done(err)
+                        }else{
+                            return done(null,results.relationName)
+                        }
+                    }
+                )
             }
         }
     )

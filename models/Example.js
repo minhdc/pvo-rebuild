@@ -5,8 +5,12 @@ let ExampleSchema = new Schema({
     example:{type:Schema.Types.String,required:true,trim:true},
     keywords:{type:Schema.Types.Array,default:["uncategorized"]},
     source:{type:Schema.Types.String,trim:true},
+    relatedConcept:{type:Schema.Types.ObjectId,required:true},
+    idRelation:{type:Schema.Types.ObjectId,required:true},
     createdAt:{type:Schema.Types.Date,default:new Date()},
     createdBy:{type:Schema.Types.ObjectId,required:true}
 })
 
-module.exports = ExampleSchema
+let Example = mongoose.model('examples',ExampleSchema)
+
+module.exports = Example

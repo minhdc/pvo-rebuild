@@ -8,5 +8,7 @@ let ConceptExampleSchema = new Schema({
     createdAt:{type:Schema.Types.Date,default:new Date()},
     createdBy:{type:Schema.Types.ObjectId,required:true}
 })
+ConceptExampleSchema.index({id_concept:1,id_example:1},{unique:true})
+let ConceptExample = mongoose.model('concept_examples',ConceptExampleSchema)
 
-module.exports = ConceptExampleSchema
+module.exports = ConceptExample
