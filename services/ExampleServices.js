@@ -6,7 +6,7 @@ let ConceptExampleRelation = db.ConceptExampleRelation
 module.exports = {
     addExample,
     listExample,
-    
+    getConceptExampleRelation,
     deleteExample
 }
 
@@ -38,14 +38,26 @@ function getConceptExampleRelation(params,done){
                 console.log(err)
                 return done(err)
             }else{
-                
+                ConceptExampleRelation.findOne(
+                    {_id:results.idRelation},
+                    (err,results)=>{
+                        if(err){
+                            console.log(err)
+                            return done(err)
+                        }else if (results != null) {
+                            return done(null,results.relationName)
+                        }
+                    }
+                )
             }
         }
     )
 }
 
 function listExample(params,done){
-    Example.find((err,results)=>{
+    Example.find({
+        createdBy:params.userid
+    },(err,results)=>{
         if(err){
             console.log(err)
             return done(err)

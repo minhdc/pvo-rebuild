@@ -10,7 +10,7 @@ let ExampleSchema = new Schema({
     createdAt:{type:Schema.Types.Date,default:new Date()},
     createdBy:{type:Schema.Types.ObjectId,required:true}
 })
-
+ExampleSchema.index({example:1,relatedConcept:1},{unique:true})
 let Example = mongoose.model('examples',ExampleSchema)
 
 module.exports = Example
